@@ -67,7 +67,7 @@ fn on_date(lex: &Lexer<Token>) -> OnDate {
 pub fn parse(template: &str) -> Template {
     let mut result = vec![];
     for token in Token::lexer(template).flatten() {
-        result.push(token)
+        result.push(token);
     }
     result
 }
@@ -91,7 +91,7 @@ mod tests {
         assert_eq!(
             get_content_between_parentheses("teste(test)teste"),
             "test".to_string()
-        )
+        );
     }
 
     #[test]
@@ -105,7 +105,7 @@ mod tests {
             "6".to_string(),
             "7".to_string(),
         ])];
-        assert_eq!(parse("!by_weekday(1;2;3;4;5;6;7)"), expected)
+        assert_eq!(parse("!by_weekday(1;2;3;4;5;6;7)"), expected);
     }
     #[test]
     fn can_parse_copy_last_day() {
@@ -113,7 +113,7 @@ mod tests {
             Token::Literal("# sec\n".to_string()),
             Token::CopyLastDay("# sec".to_string()),
         ];
-        assert_eq!(parse("# sec\n!copy_last_day"), expected)
+        assert_eq!(parse("# sec\n!copy_last_day"), expected);
     }
 
     #[test]
@@ -122,7 +122,7 @@ mod tests {
             Token::Literal("# sec\n".to_string()),
             Token::CopyTasks("# sec".to_string()),
         ];
-        assert_eq!(parse("# sec\n!copy_tasks"), expected)
+        assert_eq!(parse("# sec\n!copy_tasks"), expected);
     }
     #[test]
     fn can_parse_on_date() {
@@ -130,7 +130,7 @@ mod tests {
             date: MonthDay { month: 11, day: 20 },
             text: "test".to_string(),
         });
-        assert_eq!(parse("!on_date(20/11, test)"), vec![expected])
+        assert_eq!(parse("!on_date(20/11, test)"), vec![expected]);
     }
     #[test]
     fn can_parse_literal() {
@@ -143,6 +143,6 @@ mod tests {
             Token::Literal("a".to_string()),
             Token::Literal("l".to_string()),
         ];
-        assert_eq!(parse("Literal"), expected)
+        assert_eq!(parse("Literal"), expected);
     }
 }
