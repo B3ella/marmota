@@ -18,3 +18,8 @@ regex = "1.13.1"
 name = "marmota"
 path = "src/main.rs"
 
+[lints.clippy]
+# UM, ACTUALLY
+pedantic = { level = "deny", priority = -1 }
+# DEVELOPING LINTS
+nursery = { level = "deny", priority = -1 }
