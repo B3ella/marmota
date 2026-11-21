@@ -1,0 +1,8 @@
+- uses: dtolnay/rust-toolchain@stable
+  with:
+    components: llvm-tools-preview
+- uses: taiki-e/install-action@cargo-llvm-cov
+- uses: taiki-e/install-action@nextest
+
+- name: Collect coverage data
+  run: cargo llvm-cov nextest
