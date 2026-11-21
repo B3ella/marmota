@@ -40,10 +40,9 @@ fn get_section_text(section: &str, yesterday: &str) -> String {
 
     let header_end = section.find(' ').unwrap_or(0);
     let header = "\n".to_string() + &section[..=header_end];
-    let section_end = match yesterday[section_start..].find(&header) {
-        None => yesterday.len(),
-        Some(v) => v + section_start,
-    };
+    let section_end = yesterday[section_start..]
+        .find(&header)
+        .map_or(yesterday.len(), |v| v + section_start);
 
     let section_text = &yesterday[section_start..section_end];
     section_text.trim().to_string()
