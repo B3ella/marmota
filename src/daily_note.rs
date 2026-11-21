@@ -70,7 +70,8 @@ fn get_latest_note(path: &str) -> Option<String> {
             .to_string()
     });
 
-    let daily_note_reggex = Regex::new(r".*\d{4}-\d{2}-\d{2}.md").unwrap();
+    let daily_note_reggex =
+        Regex::new(r".*\d{4}-\d{2}-\d{2}.md").expect("Regex for daily note is not valid");
     let daily_notes = paths.filter(|file| daily_note_reggex.is_match(file));
 
     let mut max = String::new();
