@@ -35,6 +35,19 @@ jobs:
           nix_path: nixpkgs=channel:nixos-unstable
       - name: run build
         run: nix flake check
+  testCoverage:
+    needs: RustChecks
+    - uses: dtolnay/rust-toolchain@nightly
+      with:
+        components: llvm-tools-preview
+    - uses: taiki-e/install-action@cargo-llvm-cov
+    - uses: taiki-e/install-action@nextest
+
+    - name: Collect coverage data
+      run: |
+        cargo llvm-cov --no-report nextest
+        cargo llvm-cov --no-report --doc
+        cargo llvm-cov report --doctests --lcov --output-path lcov.info
   SonarQube:
     if: github.ref == 'refs/heads/main'
     needs: NixBuild
