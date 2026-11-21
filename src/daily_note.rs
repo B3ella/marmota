@@ -45,10 +45,7 @@ pub fn create_daily_note(date: DateTime<Local>, config: &config::Config) {
 
     let last_note = get_latest_note(&config.archive);
 
-    let last_note = match last_note {
-        Some(note) => read_file(&note),
-        None => String::new(),
-    };
+    let last_note = last_note.map_or_else(String::new, |note| read_file(&note));
 
     let template = get_template(&config.template);
 
