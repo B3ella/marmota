@@ -22,7 +22,7 @@ pub fn symlink_daily_note(date: DateTime<Local>, config: &config::Config) {
 
 fn create_parent_dir(path: &str) {
     let path = PathBuf::from(path);
-    let parent_dir = path.parent().unwrap();
+    let parent_dir = path.parent().expect("could not find parent dir for {path}");
     let _ = fs::create_dir_all(parent_dir);
 }
 
