@@ -23,3 +23,5 @@ path = "src/main.rs"
 pedantic = { level = "deny", priority = -1 }
 # DEVELOPING LINTS
 nursery = { level = "deny", priority = -1 }
+# DENY PANICS
+unwrap_used = "deny"

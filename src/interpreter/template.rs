@@ -51,7 +51,9 @@ fn by_weekday(lex: &Lexer<Token>) -> [String; 7] {
 
 fn on_date(lex: &Lexer<Token>) -> OnDate {
     let result = get_content_between_parentheses(lex.slice());
-    let (date_expected, text) = result.split_once(',').unwrap();
+    let (date_expected, text) = result
+        .split_once(',')
+        .expect("Expected date on '(dd/mm)' format");
     let (day, month) = date_expected
         .trim()
         .split_once('/')
