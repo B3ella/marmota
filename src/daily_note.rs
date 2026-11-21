@@ -110,7 +110,7 @@ To change it edit the file at {template}
 ## Tasks
 !copy_tasks"
     );
-    fs::write(template, default_template).unwrap();
+    fs::write(template, default_template).expect("failed to write default template file");
 }
 
 #[cfg(test)]
