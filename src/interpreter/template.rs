@@ -67,7 +67,7 @@ fn on_date(lex: &Lexer<Token>) -> OnDate {
 pub fn parse(template: &str) -> Template {
     let mut result = vec![];
     for token in Token::lexer(template).flatten() {
-        result.push(token)
+        result.push(token);
     }
     result
 }
