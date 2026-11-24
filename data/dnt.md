@@ -25,7 +25,7 @@
 !by_weekday (
     - [ ] long run;
     - [ ] short run;;;
-    - [ ] long run
+    - [ ] long run;
     - [ ] Arrumar quarto;
     - [ ] short run;
 )
