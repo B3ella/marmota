@@ -190,10 +190,11 @@ mod tests {
                 "\n    - [ ] Github update".to_string(),
                 "\n    - [ ] Atualizar currículo".to_string(),
                 "\n    - [ ] Revisar meus esforços da semana".to_string(),
-                "\n".to_string(),
+                "\n    ".to_string(),
             ]),
             Token::Literal("\n".to_string()),
             Token::CopyTasks("## Get a job".to_string()),
+            Token::Literal("\n".to_string()),
             Token::Literal("### Esforços da semana\n".to_string()),
             Token::Literal("## Cronograma\n".to_string()),
             Token::ByWeekday([
@@ -205,6 +206,7 @@ mod tests {
                 "".to_string(),
                 "".to_string()
             ]),
+            Token::Literal("\n".to_string()),
             Token::OnDate(OnDate {
                 date: MonthDay { month: 11, day: 20 },
                 text: "17:00 - dentista".to_string(),
