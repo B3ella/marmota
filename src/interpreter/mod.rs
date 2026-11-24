@@ -65,6 +65,8 @@ fn on_date(expected_date: &template::MonthDay, text: &str, real_date: DateTime<L
 mod tests {
     use super::*;
     use chrono::TimeZone;
+    use std::fs::File;
+    use std::io::Read;
 
     fn date(year: i32, month: u32, day: u32) -> DateTime<Local> {
         Local
@@ -144,5 +146,16 @@ mod tests {
         let template = "no text\n!on_date(01/01, test text)";
         let output = process_tokens(template, "", date(2024, 1, 2));
         assert_eq!(output, "no text");
+    }
+    #[test]
+    fn on_full_template() {
+        let mut template = String::new();
+        let _ = File::open("data/dnt.md")
+            .unwrap().read_to_string(&mut template);
+        let mut result = String::new();
+        let _ = File::open("data/result.md")
+            .unwrap().read_to_string(&mut result);
+        let output = process_tokens(&template, "", date(2024, 11, 24));
+        assert_eq!(output, result);
     }
 }
