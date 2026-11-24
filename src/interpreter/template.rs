@@ -46,7 +46,10 @@ fn by_weekday(lex: &Lexer<Token>) -> [String; 7] {
     let content_by_day: Vec<String> = result
         .split(';')
         .map(std::string::ToString::to_string)
-        .collect();
+        .collect::<Vec<String>>()
+        .get(0..7)
+        .expect("Expected 7 days")
+        .to_vec();
     let content_by_day: [String; 7] = content_by_day.try_into().expect("Expected 7 days");
     content_by_day
 }
