@@ -87,6 +87,8 @@ fn get_content_between_parentheses(line: &str) -> String {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use std::fs::File;
+    use std::io::Read;
 
     #[test]
     fn content_between_parenthesis() {
@@ -146,5 +148,13 @@ mod tests {
             Token::Literal("l".to_string()),
         ];
         assert_eq!(parse("Literal"), expected);
+    }
+    #[test]
+    fn on_full_template() {
+        let mut template = String::new();
+        let _ = File::open("data/dnt.md")
+            .unwrap().read_to_string(&mut template);
+        let output = parse(&template);
+        assert_eq!(output, vec![]);
     }
 }
