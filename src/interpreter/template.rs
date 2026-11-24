@@ -27,7 +27,7 @@ pub enum Token {
     CopyLastDay(Section),
     #[regex(r"!copy_tasks", |lex| lex.extras.clone())]
     CopyTasks(Section),
-    #[regex(r"!by_weekday(?&params)", by_weekday)]
+    #[regex(r"!by_weekday(\ |\t|\n|\r)*\(([^;]*;){6}([^;]*;?)(\ |\t|\n|\r)*\)", by_weekday)]
     ByWeekday([String; 7]),
     #[regex(r"!on_date(?&on_date_params)", on_date)]
     OnDate(OnDate),
