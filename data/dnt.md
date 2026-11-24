@@ -13,6 +13,7 @@
     - [ ] Github update;
     - [ ] Atualizar currículo;
     - [ ] Revisar meus esforços da semana;
+    ;
 )
 !copy_tasks
 ### Esforços da semana
