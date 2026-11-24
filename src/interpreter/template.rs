@@ -20,6 +20,8 @@ pub struct OnDate {
 #[logos(extras = String)]
 #[logos(subpattern whitespace = r"(\ |\t|\n|\r)")]
 #[logos(subpattern params = r"(?&whitespace)*\((.|\n)*?\)")]
+#[logos(subpattern month_day = r"\d{1,2}\/\d{1,2}")]
+#[logos(subpattern on_date_params = r"(?&whitespace)*\((?&month_day).*?\)")]
 pub enum Token {
     #[regex(r"!copy_last_day", |lex| lex.extras.clone())]
     CopyLastDay(Section),
@@ -27,7 +29,7 @@ pub enum Token {
     CopyTasks(Section),
     #[regex(r"!by_weekday(?&params)", by_weekday)]
     ByWeekday([String; 7]),
-    #[regex(r"!on_date(?&params)", on_date)]
+    #[regex(r"!on_date(?&on_date_params)", on_date)]
     OnDate(OnDate),
     #[regex(r"#+\ .+?\n", header_callback)]
     #[regex(r".|\n", |lex| lex.slice().to_string())]
@@ -155,6 +157,90 @@ mod tests {
         let _ = File::open("data/dnt.md")
             .unwrap().read_to_string(&mut template);
         let output = parse(&template);
-        assert_eq!(output, vec![]);
+        let expected = vec![
+            Token::Literal("## Quotes\n".to_string()),
+            Token::CopyLastDay("## Quotes".to_string()),
+            Token::Literal("\n".to_string()),
+            Token::Literal("## Plans\n".to_string()),
+            Token::CopyLastDay("## Plans".to_string()),
+            Token::Literal("\n".to_string()),
+            Token::OnDate(OnDate {
+                date: MonthDay { month: 09, day: 28 },
+                text: "meu Aniversário de programadora".to_string(),
+            }),
+            Token::Literal("\n".to_string()),
+            Token::OnDate(OnDate {
+                date: MonthDay { month: 03, day: 12 },
+                text: "checkup".to_string(),
+            }),
+            Token::Literal("\n".to_string()),
+            Token::OnDate(OnDate {
+                date: MonthDay { month: 11, day: 24 },
+                text: "test".to_string(),
+            }),
+            Token::Literal("\n".to_string()),
+            Token::Literal("## Get a job\n".to_string()),
+            Token::ByWeekday([
+                "\n    ".to_string(),
+                "\n    - [ ] Linkedin post".to_string(),
+                "\n    - [ ] Atualizar site".to_string(),
+                "\n    - [ ] Github update".to_string(),
+                "\n    - [ ] Atualizar currículo".to_string(),
+                "\n    - [ ] Revisar meus esforços da semana".to_string(),
+                "\n".to_string(),
+            ]),
+            Token::Literal("\n".to_string()),
+            Token::CopyTasks("## Get a job".to_string()),
+            Token::Literal("### Esforços da semana\n".to_string()),
+            Token::Literal("## Cronograma\n".to_string()),
+            Token::ByWeekday([
+                "".to_string(),
+                "".to_string(),
+                "".to_string(),
+                "aula de violão às 16:00".to_string(),
+                "".to_string(),
+                "".to_string(),
+                "".to_string()
+            ]),
+            Token::OnDate(OnDate {
+                date: MonthDay { month: 11, day: 20 },
+                text: "17:00 - dentista".to_string(),
+            }),
+            Token::OnDate(OnDate {
+                date: MonthDay { month: 12, day: 01 },
+                text: "amanhã 7:30 tirar os pontos da tiramisu".to_string(),
+            }),
+            Token::Literal("## Habit tracker\n".to_string()),
+            Token::Literal("-".to_string()),
+            Token::Literal(" ".to_string()),
+            Token::Literal("[".to_string()),
+            Token::Literal(" ".to_string()),
+            Token::Literal("]".to_string()),
+            Token::Literal(" ".to_string()),
+            Token::Literal("O".to_string()),
+            Token::Literal("p".to_string()),
+            Token::Literal("e".to_string()),
+            Token::Literal("n".to_string()),
+            Token::Literal(" ".to_string()),
+            Token::Literal("n".to_string()),
+            Token::Literal("o".to_string()),
+            Token::Literal("t".to_string()),
+            Token::Literal("e".to_string()),
+            Token::Literal("s".to_string()),
+            Token::ByWeekday([
+                "\n    - [ ] long run;".to_string(),
+                "\n    - [ ] short run".to_string(),
+                "".to_string(),
+                "".to_string(),
+                "\n    - [ ] long run;".to_string(),
+                "\n    - [ ] Arrumar quarto;".to_string(),
+                "\n    - [ ] short run".to_string(),
+            ]),
+            Token::Literal("## Qual a MVA do dia\n".to_string()),
+            Token::Literal("## Diary\n".to_string()),
+        ];
+        for i in 0..expected.len() {
+            assert_eq!(output[i], expected[i]);
+        }
     }
 }

@@ -4,7 +4,7 @@
 !copy_last_day
 !on_date(28/09, meu Aniversário de programadora)
 !on_date(12/03, checkup)
-!on_date(24/11, teste)
+!on_date(24/11, test)
 ## Get a job
 !by_weekday (
     ;
@@ -22,13 +22,6 @@
 !on_date(01/12, amanhã 7:30 tirar os pontos da tiramisu)
 ## Habit tracker
 - [ ] Open notes
-- [ ] Limpar a caixa da tiramisu
-- [ ] Trocar água da tiramisu
-- [ ] Tirar o lixo
----
-- [ ] **Estrogenio**
-- [ ] **Antiandrogênio**
-- [ ] 3 vagas
 !by_weekday (
     - [ ] long run;
     - [ ] short run;;;
