@@ -151,10 +151,12 @@ mod tests {
     fn on_full_template() {
         let mut template = String::new();
         let _ = File::open("data/dnt.md")
-            .unwrap().read_to_string(&mut template);
+            .unwrap()
+            .read_to_string(&mut template);
         let mut result = String::new();
         let _ = File::open("data/result.md")
-            .unwrap().read_to_string(&mut result);
+            .unwrap()
+            .read_to_string(&mut result);
         let output = process_tokens(&template, "", date(2024, 11, 24));
         assert_eq!(output, result.trim());
     }

@@ -23,7 +23,10 @@ pub enum Token {
     CopyLastDay(Section),
     #[regex(r"!copy_tasks", |lex| lex.extras.clone())]
     CopyTasks(Section),
-    #[regex(r"!by_weekday(\ |\t|\n|\r)*\(([^;]*;){6}([^;]*;?)(\ |\t|\n|\r)*\)", by_weekday)]
+    #[regex(
+        r"!by_weekday(\ |\t|\n|\r)*\(([^;]*;){6}([^;]*;?)(\ |\t|\n|\r)*\)",
+        by_weekday
+    )]
     ByWeekday([String; 7]),
     #[regex(r"!on_date(\ |\t|\n|\r)*\(\d{1,2}\/\d{1,2},.*?\)", on_date)]
     OnDate(OnDate),
@@ -161,7 +164,8 @@ mod tests {
     fn on_full_template() {
         let mut template = String::new();
         let _ = File::open("data/dnt.md")
-            .unwrap().read_to_string(&mut template);
+            .unwrap()
+            .read_to_string(&mut template);
         let output = parse(&template);
         let expected = vec![
             Token::Literal("## Quotes\n".to_string()),
@@ -217,7 +221,7 @@ mod tests {
                 "aula de violão às 16:00".to_string(),
                 "".to_string(),
                 "".to_string(),
-                "".to_string()
+                "".to_string(),
             ]),
             Token::Literal("\n".to_string()),
             Token::Literal("## Habit tracker\n".to_string()),
