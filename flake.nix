@@ -9,7 +9,7 @@
       mkMarmotaPackage = pkgs:
         pkgs.rustPlatform.buildRustPackage {
           pname = "marmota";
-          version = "2.0.1";
+          version = "2.0.2";
 
           cargoLock.lockFile = ./Cargo.lock;
           src = self;
