@@ -18,10 +18,6 @@ pub struct OnDate {
 
 #[derive(Logos, Debug, PartialEq, Eq)]
 #[logos(extras = String)]
-#[logos(subpattern whitespace = r"(\ |\t|\n|\r)")]
-#[logos(subpattern params = r"(?&whitespace)*\((.|\n)*?\)")]
-#[logos(subpattern month_day = r"\d{1,2}\/\d{1,2}")]
-#[logos(subpattern on_date_params = r"(?&whitespace)*\((?&month_day).*?\)")]
 pub enum Token {
     #[regex(r"!copy_last_day", |lex| lex.extras.clone())]
     CopyLastDay(Section),
@@ -29,7 +25,7 @@ pub enum Token {
     CopyTasks(Section),
     #[regex(r"!by_weekday(\ |\t|\n|\r)*\(([^;]*;){6}([^;]*;?)(\ |\t|\n|\r)*\)", by_weekday)]
     ByWeekday([String; 7]),
-    #[regex(r"!on_date(?&on_date_params)", on_date)]
+    #[regex(r"!on_date(\ |\t|\n|\r)*\(\d{1,2}\/\d{1,2},.*?\)", on_date)]
     OnDate(OnDate),
     #[regex(r"#+\ .+?\n", header_callback)]
     #[regex(r".|\n", |lex| lex.slice().to_string())]
