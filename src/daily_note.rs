@@ -22,7 +22,7 @@ pub fn symlink_daily_note(date: DateTime<Local>, config: &config::Config) {
 
 fn create_parent_dir(path: &str) {
     let path = PathBuf::from(path);
-    let parent_dir = path.parent().unwrap();
+    let parent_dir = path.parent().expect("could not find parent dir");
     let _ = fs::create_dir_all(parent_dir);
 }
 
@@ -70,7 +70,8 @@ fn get_latest_note(path: &str) -> Option<String> {
             .to_string()
     });
 
-    let daily_note_reggex = Regex::new(r".*\d{4}-\d{2}-\d{2}.md").unwrap();
+    let daily_note_reggex =
+        Regex::new(r".*\d{4}-\d{2}-\d{2}.md").expect("Regex for daily note is not valid");
     let daily_notes = paths.filter(|file| daily_note_reggex.is_match(file));
 
     let mut max = String::new();
@@ -109,7 +110,7 @@ To change it edit the file at {template}
 ## Tasks
 !copy_tasks"
     );
-    fs::write(template, default_template).unwrap();
+    fs::write(template, default_template).expect("failed to write default template file");
 }
 
 #[cfg(test)]
