@@ -137,6 +137,12 @@ mod tests {
             text: "test".to_string(),
         });
         assert_eq!(parse("!on_date(20/11, test)"), vec![expected]);
+
+        let expected = Token::OnDate(OnDate {
+            date: MonthDay { month: 11, day: 20 },
+            text: "17:00 - dentista".to_string(),
+        });
+        assert_eq!(parse("!on_date(20/11, 17:00 - dentista)"), vec![expected]);
     }
     #[test]
     fn can_parse_literal() {
