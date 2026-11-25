@@ -41,6 +41,7 @@ fn by_weekday(lex: &Lexer<Token>) -> [String; 7] {
     let result = get_content_between_parentheses(lex.slice());
     let content_by_day: Vec<String> = result
         .split(';')
+        .map(|s| s.trim())
         .map(std::string::ToString::to_string)
         .collect::<Vec<String>>()
         .get(0..7)
