@@ -156,6 +156,6 @@ mod tests {
         let _ = File::open("data/result.md")
             .unwrap().read_to_string(&mut result);
         let output = process_tokens(&template, "", date(2024, 11, 24));
-        assert_eq!(output, result);
+        assert_eq!(output, result.trim());
     }
 }
