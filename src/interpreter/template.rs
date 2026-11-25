@@ -160,6 +160,7 @@ mod tests {
         ];
         assert_eq!(parse("Literal"), expected);
     }
+    #[allow(clippy::too_many_lines)]
     #[test]
     fn on_full_template() {
         let mut template = String::new();
@@ -175,12 +176,12 @@ mod tests {
             Token::CopyLastDay("## Plans".to_string()),
             Token::Literal("\n".to_string()),
             Token::OnDate(OnDate {
-                date: MonthDay { month: 09, day: 28 },
+                date: MonthDay { month: 9, day: 28 },
                 text: "meu Aniversário de programadora".to_string(),
             }),
             Token::Literal("\n".to_string()),
             Token::OnDate(OnDate {
-                date: MonthDay { month: 03, day: 12 },
+                date: MonthDay { month: 3, day: 12 },
                 text: "checkup".to_string(),
             }),
             Token::Literal("\n".to_string()),
@@ -210,7 +211,7 @@ mod tests {
             }),
             Token::Literal("\n".to_string()),
             Token::OnDate(OnDate {
-                date: MonthDay { month: 12, day: 01 },
+                date: MonthDay { month: 12, day: 1 },
                 text: "amanhã 7:30 tirar os pontos da tiramisu".to_string(),
             }),
             Token::Literal("\n".to_string()),
