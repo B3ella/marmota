@@ -44,7 +44,7 @@ fn by_weekday(lex: &Lexer<Token>) -> [String; 7] {
     let result = get_content_between_parentheses(lex.slice());
     let content_by_day: Vec<String> = result
         .split(';')
-        .map(|s| s.trim())
+        .map(str::trim)
         .map(std::string::ToString::to_string)
         .collect::<Vec<String>>()
         .get(0..7)
@@ -191,13 +191,13 @@ mod tests {
             Token::Literal("\n".to_string()),
             Token::Literal("## Get a job\n".to_string()),
             Token::ByWeekday([
-                "".to_string(),
+                String::new(),
                 "- [ ] Linkedin post".to_string(),
                 "- [ ] Atualizar site".to_string(),
                 "- [ ] Github update".to_string(),
                 "- [ ] Atualizar currículo".to_string(),
                 "- [ ] Revisar meus esforços da semana".to_string(),
-                "".to_string(),
+                String::new(),
             ]),
             Token::Literal("\n".to_string()),
             Token::CopyTasks("## Get a job".to_string()),
@@ -215,13 +215,13 @@ mod tests {
             }),
             Token::Literal("\n".to_string()),
             Token::ByWeekday([
-                "".to_string(),
-                "".to_string(),
-                "".to_string(),
+                String::new(),
+                String::new(),
+                String::new(),
                 "aula de violão às 16:00".to_string(),
-                "".to_string(),
-                "".to_string(),
-                "".to_string(),
+                String::new(),
+                String::new(),
+                String::new(),
             ]),
             Token::Literal("\n".to_string()),
             Token::Literal("## Habit tracker\n".to_string()),
@@ -245,8 +245,8 @@ mod tests {
             Token::ByWeekday([
                 "- [ ] long run".to_string(),
                 "- [ ] short run".to_string(),
-                "".to_string(),
-                "".to_string(),
+                String::new(),
+                String::new(),
                 "- [ ] long run".to_string(),
                 "- [ ] Arrumar quarto".to_string(),
                 "- [ ] short run".to_string(),
