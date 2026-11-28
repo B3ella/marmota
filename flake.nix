@@ -38,6 +38,7 @@
           };
 
           config = lib.mkIf cfg.enable {
+    	    environment.systemPackages = [ marmotaPkg ];
             systemd.timers.marmota = {
               wantedBy = [ "timers.target" ];
 
