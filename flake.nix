@@ -67,6 +67,35 @@
           packages = {
             default = mkMarmotaPackage pkgs;
           };
+	  checks = nixpkgs.lib.optionalAttrs pkgs.stdenv.hostPlatform.isLinux {
+            module-installs-command =
+              let
+                eval = nixpkgs.lib.nixosSystem {
+                  modules = [
+                    self.nixosModules.default
+                    {
+                      nixpkgs.hostPlatform = system;
+                      services.marmota = {
+                        enable = true;
+                        user = "marmota";
+                      };
+                      users.users.marmota.isNormalUser = true;
+                      boot.loader.grub.enable = false;
+                      fileSystems."/" = {
+                        device = "none";
+                        fsType = "tmpfs";
+                      };
+                      system.stateVersion = "25.11";
+                    }
+                  ];
+                };
+                installed = builtins.elem self.packages.${system}.default
+                  eval.config.environment.systemPackages;
+              in
+              assert nixpkgs.lib.assertMsg installed
+                "services.marmota must install the marmota command";
+              pkgs.runCommand "marmota-module-installs-command" { } "touch $out";
+          };
         }))
       // {
         nixosModules.default = nixosModule;
