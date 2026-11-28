@@ -1,6 +1,6 @@
 ---
 name: Bug issue template
-about: Create a report to help us improve
+about: Report unexpected behavior in Marmota
 title: ''
 labels: fix
 assignees: ''
@@ -8,28 +8,29 @@ assignees: ''
 ---
 
 ## Expected Behavior
-<!--- If you're describing a bug, tell us what should happen -->
+<!-- Describe what should happen. -->
 
 ## Current Behavior
-<!--- If describing a bug, tell us what happens instead of the expected behavior -->
+<!-- Describe what happens instead. Include relevant error messages. -->
 
-## Possible Solution
-<!--- Not obligatory, but suggest a fix/reason for the bug, -->
-
-## Steps to Reproduce (for bugs)
-<!--- Provide a link to a live example, or an unambiguous set of steps to -->
-<!--- reproduce this bug. Include code to reproduce, if relevant -->
+## Steps to Reproduce
+<!-- Provide a minimal example, including template and input files where relevant. -->
 1.
 2.
 3.
-4.
-
-## Context
-<!--- How has this issue affected you? What are you trying to accomplish? -->
-<!--- Providing context helps us come up with a solution that is most useful in the real world -->
 
 ## Your Environment
-<!--- Include as many relevant details about the environment you experienced the bug in -->
-* Version used:
-* Installation method:
-* Operating System:
+<!-- Include relevant environment details. -->
+- Version used:
+- Installation method:
+- Operating system:
+
+## Possible Solution
+<!-- Optional: Suggest a fix or a possible cause, if known. -->
+
+## Acceptance Criteria
+<!-- Describe observable conditions that would confirm the bug is fixed. These may be refined during triage. -->
+- [ ]
+
+## Additional Context
+<!-- Optional: Describe the impact of the bug or provide related issues, logs or references. -->
