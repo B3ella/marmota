@@ -1,29 +1,23 @@
 ---
-name: Bug issue template
-about: Create a report to help us improve
+name: Feature issue template
+about: Suggest a new feature or improvement
 title: ''
 labels: feature
 assignees: ''
 
 ---
 
-## Expected Behavior
-<!--- If you're suggesting a change/improvement, tell us how it should work -->
+## Proposed Feature
+<!--- Describe the feature or improvement you would like to see -->
 
-## Current Behavior
-<!--- If suggesting a change/improvement, explain the difference from current behavior -->
+## Motivation
+<!--- What problem are you trying to solve? -->
+
+## Use Case
+<!--- Provide an example of how you would use this feature -->
 
 ## Possible Solution
 <!--- Not obligatory, but suggest ideas on how to implement the addition or change -->
 
-## Steps to Reproduce (for bugs)
-<!--- Provide a link to a live example, or an unambiguous set of steps to -->
-<!--- reproduce this bug. Include code to reproduce, if relevant -->
-1.
-2.
-3.
-4.
-
-## Context
-<!--- How has this issue affected you? What are you trying to accomplish? -->
-<!--- Providing context helps us come up with a solution that is most useful in the real world -->
+## Additional Context
+<!--- Provide any additional information relevant to the feature request -->
